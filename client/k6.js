@@ -7,8 +7,6 @@ const proto = open('../proto/echo/echo.proto');
 export default function () {
   const root = protobuf.parse(proto).root;
 
-  // console.log(JSON.stringify(root, null, 2));
-
   // Obtain a message type
   const echoRequest = root.lookupType("echo.EchoRequest");
   const echoResponse = root.lookupType("echo.EchoResponse");
@@ -20,12 +18,12 @@ export default function () {
   const errMsg = echoRequest.verify(payload);
   if (errMsg)
       fail(errMsg);
-  // TM - above never fails - 
+  // TM - above never fails - unsure why
 
   // Create a new message
   const message = echoRequest.create(payload);
   console.log('message: ' + JSON.stringify(message));
-  // TM - if I supply "Name" instead of "name" in the payload, message here is {} (I would expect verify to fail)
+  // TM - supplying "Name" instead of "name" in the payload, message here is {} (I would have expected verify to catch this)
 
   // Encode a message to an Uint8Array
   const buffer = echoRequest.encode(message).finish();
