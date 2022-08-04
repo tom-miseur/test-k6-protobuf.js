@@ -1,6 +1,6 @@
 # test-k6-protobuf.js
 
-To run, terminal to root and run:
+To use, terminal to root and run:
 
 `go mod tidy` to download dependencies
 
